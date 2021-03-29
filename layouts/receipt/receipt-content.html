@@ -1,0 +1,130 @@
+{{define "receipt"}}
+<table class="head-wrap" bgcolor="#FFFFFF">
+  <tr>
+    <td class="header container">
+      <div
+        class="content"
+        style="
+          background: url('https://i.ibb.co/QjWfz14/order-confirmation-1.png');
+          background-size: auto;
+          background-repeat: no-repeat;
+        "
+      >
+        <table>
+          <tr>
+            <td align="center">
+              <h1 style="margin: 80px 0px;">Thank You!</h1>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table class="body-wrap">
+  <tr>
+    <td class="container" bgcolor="#FFFFFF" align="center">
+      <h3>
+        {{ if .ToEmail.Name }} Hello {{ Title .ToEmail.Name }}{{else}}Hi
+        There{{end}}!
+      </h3>
+      <p class="lead">
+        {{ if .DescriptionHTML }} {{ .DescriptionHTML }} {{ end }}
+      </p>
+    </td>
+  </tr>
+
+  <tr class="container">
+    <td class="container td-items">
+      <table
+        cellpadding="0"
+        cellspacing="0"
+        class="content items"
+        style="display: table;"
+      >
+        <tr style="background-color: white; color: gray;">
+          <td align="left" colspan="4" style="padding: 15px;">
+            <p>
+              Order# {{ .OrderNumber }}
+              <br />
+              {{ .OrderCreated }}
+            </p>
+          </td>
+        </tr>
+        <tr style="background-color: gainsboro;">
+          <td align="center" colspan="4" style="padding: 50px 0 10px 0;">
+            <h3>
+              Order Summary
+            </h3>
+          </td>
+        </tr>
+        {{range $i, $Item := .Items}}
+        <tr>
+          <td class="item" align="center">
+            <span class="badge">x{{$Item.ProductQty}}</span>
+          </td>
+          <td class="item">{{$Item.ProductName}}</td>
+          <td class="item" align="right">$</td>
+          <td class="item" align="right">
+            {{$Item.ProductPrice}}
+          </td>
+        </tr>
+        {{end}}
+        <tr>
+          <td colspan="4" class="divider"><hr /></td>
+        </tr>
+        <tr>
+          <td class="item" align="right" colspan="2">
+            Subtotal
+          </td>
+          <td class="item" align="right">$</td>
+          <td class="item" align="right">{{.Total.SubTotal}}</td>
+        </tr>
+        {{ if CheckSkip .Total.Discount }}
+        <tr>
+          <td class="item" align="right" colspan="2">
+            Discount
+          </td>
+          <td class="item" align="right">$</td>
+          <td class="item" align="right" style="color: #dd4343;">
+            - {{.Total.Discount}}
+          </td>
+        </tr>
+        {{ end }} {{ if CheckSkip .Total.OrderShipping }}
+        <tr>
+          <td class="item" align="right" colspan="2">
+            Shipping ({{.Total.OrderShippingOption}})
+          </td>
+          <td class="item" align="right">$</td>
+          <td class="item" align="right">
+            {{.Total.OrderShipping}}
+          </td>
+        </tr>
+        {{ end }} {{ if CheckSkip .Total.TaxRate }}
+        <tr>
+          <td class="item" align="right" colspan="2">
+            Tax ({{.Total.TaxRate}}%)
+          </td>
+          <td class="item" align="right">$</td>
+          <td class="item" align="right">{{.Total.Tax}}</td>
+        </tr>
+        {{ end }}
+        <tr>
+          <td class="item" align="right" colspan="2">
+            <b>Total</b>
+          </td>
+          <td class="item" align="right">$</td>
+          <td class="item" align="right" style="font-weight: bold;">
+            {{.Total.Total}}
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  {{if .Options }} {{template "options" .}} {{end}} {{template "footer" .}}
+  {{template "legal" .}}
+</table>
+
+{{end}}

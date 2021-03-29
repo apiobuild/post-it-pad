@@ -1,0 +1,37 @@
+{{ define "options" }}
+<tr class="container">
+  <td>
+    <p class="lead">
+      Tap on these options to let us know:
+    </p>
+  </td>
+</tr>
+<tr>
+  <td class="container">
+    <table class="content options" style="display: table;">
+      <tr>
+        <td>
+          {{range $i, $Option := .Options}}
+          {{if $Option.URL }}
+          <a href="{{$Option.URL}}" target="_blank">
+            {{end}}
+            {{if $Option.ReplyText}}
+            <a href="mailto:{{$.FromEmail.Address}}?subject=Re:{{$.Subject}}&body={{$Option.ReplyText}}">
+              {{end}}
+              <div class="column option" style="background-color: {{ GetColor $i }};">
+                <span class="btn">
+                  {{if $Option.Description}}
+                  {{$Option.Description}}
+                  {{else}}
+                  {{$Option.ReplyText}}
+                  {{end}}
+                </span>
+              </div>
+            </a>
+            {{end}}
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+{{ end }}

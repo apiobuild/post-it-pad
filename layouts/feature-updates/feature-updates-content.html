@@ -1,0 +1,86 @@
+{{define "service-update"}}
+
+<table class="head-wrap" bgcolor="#FFFFFF">
+  <tr>
+    <td class="header container">
+      <div class="content">
+        <table bgcolor="#FFFFFF">
+          <tr>
+            <td>
+              {{ if .HeaderImage }}
+              <img src="{{.HeaderImage}}" style="width: 100%" />
+              {{ end }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table class="body-wrap">
+  <tr>
+    <td class="container" bgcolor="#FFFFFF">
+      <h3 style="text-align: center">
+        {{ if .ToEmail.Name }} Hello {{ Title .ToEmail.Name }}{{else}}Hi There
+        {{ end }}!
+      </h3>
+      <p class="lead">
+        {{ if .DescriptionHTML }} {{ .DescriptionHTML }} {{ end }}
+      </p>
+      <table class="content options" style="display: table">
+        {{ range $i, $announcement := .Announcements }}
+        <tr>
+          <td>
+            <div class="column option">
+              <img src="{{$announcement.ImageURL}}" style="width: 90%" />
+            </div>
+            <div class="column option" style="text-align: left">
+              <h4>{{$announcement.Title}}</h4>
+              <p>{{$announcement.Description}}</p>
+              {{if $announcement.Link}}
+
+              <a href="{{ $announcement.Link }}">
+                <span
+                  class="btn"
+                  style="
+                    color: black;
+                    background-color: white;
+                    border: 1px solid #5bc0de;
+                    border-radius: 5px;
+                  "
+                >
+                  Read More
+                </span>
+              </a>
+              {{end}}
+            </div>
+          </td>
+        </tr>
+        {{ end }}
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td class="container" bgcolor="#FFFFFF" style="padding-top: 30px">
+      <p class="lead">
+        Have questions? Looking for more features? Reply to this email or chat
+        with us on facebook. 🚀🚀
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td class="divider">
+      <hr />
+    </td>
+  </tr>
+  {{template "footer" .}}
+  <tr>
+    <td class="container" bgcolor="#FFFFFF">
+      You are receiving this email because you signed up to apio. If you'd like
+      to unsubscribe, reply to this email with 'Unsubscribe'.
+    </td>
+  </tr>
+</table>
+
+{{end}}

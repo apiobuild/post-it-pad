@@ -1,0 +1,71 @@
+{{define "footer"}}
+<!-- social & contact -->
+<tr class="social">
+  <td>
+    {{if .ContactInfo }}
+    <table class="content" style="display: table;">
+      <tr>
+        <td align="center">
+          {{if .ContactInfo.Email}}
+          <a href="mailto:{{.ContactInfo.Email}}" target="_blank">
+            <div class="soc-btn">
+              <img src="https://i.ibb.co/Dr2L68R/iconfinder-icon-set-outlinder-06-2519693.png" />
+            </div>
+          </a>
+          {{end}}
+          {{if .ContactInfo.Line}}
+          <a href="{{.ContactInfo.Line}}" target="_blank">
+            <div class="soc-btn">
+              <img src="https://i.ibb.co/rsKMxF2/iconfinder-line-1807543.png" />
+            </div>
+          </a>
+          {{end}}
+          {{if .ContactInfo.Facebook}}
+          <a href="{{.ContactInfo.Facebook}}" target="_blank">
+            <div class="soc-btn">
+              <img src="https://i.ibb.co/tKJNRw8/iconfinder-facebook-986944.png" />
+            </div>
+          </a>
+          {{end}}
+          {{if .ContactInfo.Instagram}}
+          <a href="{{.ContactInfo.Instagram}}" target="_blank">
+            <div class="soc-btn">
+              <img src="https://i.ibb.co/NxG4W7j/iconfinder-1-Instagram-colored-svg-1-5296765.png" />
+            </div>
+          </a>
+          {{end}}
+          {{if .ContactInfo.Twitter}}
+          <a href="{{.ContactInfo.Twitter}}" target="_blank">
+            <div class="soc-btn">
+              <img src="https://i.ibb.co/5Y8syXJ/iconfinder-twitter-834708.png" />
+            </div>
+          </a>
+          {{end}}
+        </td>
+      </tr>
+    </table>
+    {{end}}
+  </td>
+</tr>
+<tr>
+  <td>
+    <table class="content" style="display: table;">
+      <tr>
+        <td align="center">
+          <a href="{{.ContactInfo.Website}}">
+            {{ if .ContactInfo.Logo }}
+            <img class="logo" src="{{.ContactInfo.Logo}}"></img>
+            {{ else }}
+            <h5>
+              {{ .ContactInfo.Name }}
+            </h5>
+            {{ end }}
+          </a>
+        </td>
+      </tr>
+    </table>
+
+    <span class="clear"></span>
+  </td>
+</tr>
+{{end}}

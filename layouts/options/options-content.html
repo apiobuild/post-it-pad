@@ -1,0 +1,36 @@
+{{define "reply"}}
+
+<table class="head-wrap" bgcolor="#FFFFFF">
+  <tr>
+    <td class="header container">
+      <div class="content">
+        <table bgcolor="#FFFFFF">
+          <tr>
+            <td>
+              {{ if .HeaderImage }}
+              <img src="{{.HeaderImage}}" style="width: 100%;" />
+              {{ end }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table class="body-wrap">
+  <tr>
+    <td class="container" bgcolor="#FFFFFF">
+      <h3 style="text-align: center;">
+        {{ if .ToEmail.Name }} Hello {{ Title .ToEmail.Name }}{{else}}Hi There
+        {{ end }}!
+      </h3>
+      <p class="lead">
+        {{ if .DescriptionHTML }} {{ .DescriptionHTML }} {{ end }}
+      </p>
+    </td>
+  </tr>
+  {{if .Options }} {{template "options" .}} {{end}} {{template "footer" .}}
+</table>
+
+{{end}}
