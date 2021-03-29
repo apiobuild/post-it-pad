@@ -1,0 +1,6 @@
+vendor/
+.vscode/
+*-creds.json
+swagger.json
+main
+cp.out
