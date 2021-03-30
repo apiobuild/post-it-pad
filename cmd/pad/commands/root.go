@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/apiobuild/post-it-pad/cmd/pad/commands/generate"
 	"github.com/spf13/cobra"
 )
 
@@ -25,6 +26,7 @@ var version = &cobra.Command{
 
 func Execute() {
 	root.AddCommand(version)
+	root.AddCommand(generate.Command)
 	if err := root.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
