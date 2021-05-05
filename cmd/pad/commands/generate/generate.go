@@ -15,6 +15,8 @@ const (
 	destPathVarShort  = "o"
 	argsPathVar       = "args"
 	argsPathVarShort  = "a"
+	argsVar           = "json"
+	argsVarShort      = "j"
 	serveVar          = "serve"
 	serveVarShort     = "s"
 	portVar           = "port"
@@ -26,6 +28,7 @@ var (
 	layoutDir string
 	destPath  string
 	argsPath  string
+	argsJSON  string
 	serve     bool
 	port      int
 )
@@ -42,6 +45,7 @@ var Command = &cobra.Command{
 			defaultStringValueOrNil(layout),
 			defaultStringValueOrNil(destPath),
 			defaultStringValueOrNil(argsPath),
+			defaultStringValueOrNil(argsJSON),
 		)
 		g.Generate()
 	},
@@ -56,26 +60,30 @@ func defaultStringValueOrNil(val string) *string {
 
 func init() {
 	Command.PersistentFlags().StringVarP(&layout, layoutVar, layoutVarShort, "",
-		"Specify name of the layout to generate templated email for. Generate for all layouts if not provided.")
+		"Name of the layout to generate templated email for. Generate for all layouts if not provided.")
 	viper.BindPFlag(layoutVar, Command.PersistentFlags().Lookup(layoutVar))
 
 	Command.PersistentFlags().StringVarP(&layoutDir, layoutDirVar, layoutDirVarShort, "",
-		"Specify layout director.")
+		"Path to layout director.")
 	viper.BindPFlag(layoutVar, Command.PersistentFlags().Lookup(layoutDirVar))
 
 	Command.PersistentFlags().StringVarP(&destPath, destPathVar, destPathVarShort, "",
-		"Specify the path to write generated html to.")
+		"Path to write generated html.")
 	viper.BindPFlag(destPathVar, Command.PersistentFlags().Lookup(destPathVar))
 
 	Command.PersistentFlags().StringVarP(&argsPath, argsPathVar, argsPathVarShort, "",
-		"Specify args json file path.")
-	viper.BindPFlag(layoutVar, Command.PersistentFlags().Lookup(argsPathVar))
+		"Specify args json file path, default to example args.json if not provided.")
+	viper.BindPFlag(argsPathVar, Command.PersistentFlags().Lookup(argsPathVar))
+
+	Command.PersistentFlags().StringVarP(&argsJSON, argsVar, argsVarShort, "",
+		"Specify args json directly.")
+	viper.BindPFlag(argsVar, Command.PersistentFlags().Lookup(argsPathVar))
 
 	Command.PersistentFlags().BoolVarP(&serve, serveVar, serveVarShort, false,
 		"Serve and preview.")
 	viper.BindPFlag(serveVar, Command.PersistentFlags().Lookup(serveVar))
 
 	Command.PersistentFlags().IntVarP(&port, portVar, portVarShort, 8080,
-		"Specify the port to serve to.")
+		"Port to serve to, default to 8080.")
 	viper.BindPFlag(portVar, Command.PersistentFlags().Lookup(portVar))
 }

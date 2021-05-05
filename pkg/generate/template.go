@@ -85,18 +85,31 @@ func (g Generator) getOrDefaultArgsPath(layoutName string) (argsPath string) {
 	return
 }
 
-func (g *Generator) loadArgs(layoutName string, args interface{}) (err error) {
+func (g Generator) getArgsBytesFromFile(layoutName string) (b []byte, err error) {
+	var jsonFile *os.File
 	argsPath := g.getOrDefaultArgsPath(layoutName)
 	g.getLogFields(nil).Infof("Reading args json file from %s", argsPath)
-	jsonFile, err := os.Open(argsPath)
+	jsonFile, err = os.Open(argsPath)
 	if err != nil {
 		g.getLogFields(err).Info("Error reading args json file")
 		return
 	}
-
 	defer jsonFile.Close()
+	b, _ = ioutil.ReadAll(jsonFile)
+	return
+}
 
-	b, _ := ioutil.ReadAll(jsonFile)
+func (g *Generator) loadArgs(layoutName string, args interface{}) (err error) {
+	var b []byte
+	if g.ArgsJSON != nil {
+		g.getLogFields(nil).Info("Reading args json from input")
+		b = []byte(*g.ArgsJSON)
+	} else {
+		if b, err = g.getArgsBytesFromFile(layoutName); err != nil {
+			return
+		}
+	}
+
 	json.Unmarshal(b, &args)
 	g.Args = args
 	return

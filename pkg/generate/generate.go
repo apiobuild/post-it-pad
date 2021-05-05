@@ -14,6 +14,7 @@ type Generator struct {
 	DestPath   string
 	HTML       *bytes.Buffer
 	ArgsPath   *string
+	ArgsJSON   *string
 	Args       interface{}
 }
 
@@ -36,12 +37,13 @@ func getStringOrDefault(val *string, defaultVal string) (useVal string) {
 }
 
 // NewGenerator creates new templated email generator
-func NewGenerator(layoutDir *string, layoutName *string, destPath *string, argsPath *string) (g Generator) {
+func NewGenerator(layoutDir *string, layoutName *string, destPath *string, argsPath *string, argsJSON *string) (g Generator) {
 	g = Generator{
 		LayoutDir:  getStringOrDefault(layoutDir, DefaultLayoutDir),
 		LayoutName: layoutName,
 		DestPath:   getStringOrDefault(destPath, DefaultDestPath),
 		ArgsPath:   argsPath,
+		ArgsJSON:   argsJSON,
 		HTML:       new(bytes.Buffer),
 	}
 	g.getLogFields(nil).Info("New email generator created")
