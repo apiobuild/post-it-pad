@@ -7,6 +7,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// Generator is the base struct to generate templated email
 type Generator struct {
 	LayoutDir  string
 	LayoutName *string
@@ -15,6 +16,7 @@ type Generator struct {
 	Args       map[string]interface{}
 }
 
+// Default values when not provided
 const (
 	DefaultLayoutDir = "./layouts"
 	DefaultDestPath  = "./generated.html"

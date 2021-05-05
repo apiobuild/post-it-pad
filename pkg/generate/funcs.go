@@ -24,6 +24,7 @@ func checkStringNil(val *string) bool {
 	return false
 }
 
+// FuncMap is the default func map that comes w/ generator
 var FuncMap = template.FuncMap{
 	"Title":      strings.Title,
 	"TrimScheme": trimScheme,

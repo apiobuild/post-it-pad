@@ -20,4 +20,4 @@ We welcome contributions for more layouts as the community sees fit.
 
 ## Email Template CSS
 
-The email template css is based off https://github.com/leemunroe/responsive-html-email-template.
+The email template css is based off [https://github.com/leemunroe/responsive-html-email-template](https://github.com/leemunroe/responsive-html-email-template).

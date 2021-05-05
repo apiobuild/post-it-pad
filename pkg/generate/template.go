@@ -7,6 +7,7 @@ import (
 	"path"
 )
 
+// Default constants
 const (
 	defaultHTML          = "default.html"
 	sharedDir            = "shared"
@@ -60,6 +61,7 @@ func (g *Generator) getSharedTemplate(layoutName string) (t *template.Template, 
 	return
 }
 
+// GetTemplateByLayout reads layout and shared directory to create base template
 func (g Generator) GetTemplateByLayout(layoutName string) (err error) {
 	if err = checkLayoutDir(g.LayoutDir); err != nil {
 		g.getLogFields(err).Error("Base layout directory not found")
