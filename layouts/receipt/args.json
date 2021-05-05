@@ -30,5 +30,15 @@
         "order_total": "23.99",
         "order_shipping_option": "moon express",
         "order_shipping": "0"
-    }
+    },
+    "options": [
+        {
+            "option_url": "https://apiobuild.com",
+            "display_text": "Go to APIO"
+        },
+        {
+            "option_text": "Cancel",
+            "display_text": "Cancel Order"
+        }
+    ]
 }

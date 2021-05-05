@@ -11,23 +11,19 @@
       <tr>
         <td>
           {{range $i, $Option := .Options}}
-          {{if $Option.URL }}
-          <a href="{{$Option.URL}}" target="_blank">
-            {{end}}
-            {{if $Option.ReplyText}}
-            <a href="mailto:{{$.FromEmail.Address}}?subject=Re:{{$.Subject}}&body={{$Option.ReplyText}}">
-              {{end}}
-              <div class="column option" style="background-color: {{ GetColor $i }};">
-                <span class="btn">
-                  {{if $Option.Description}}
-                  {{$Option.Description}}
-                  {{else}}
-                  {{$Option.ReplyText}}
-                  {{end}}
-                </span>
-              </div>
-            </a>
-            {{end}}
+          {{if $Option.URL }} <a href="{{$Option.URL}}" target="_blank"> {{end}}
+          {{if $Option.ReplyText}} <a href="mailto:{{$.FromEmail.Address}}?subject=Re:{{$.Subject}}&body={{$Option.ReplyText}}"> {{end}}
+            <div class="column option" style="background-color: {{ GetColor $i }};">
+              <span class="btn">
+                {{if $Option.Description}}
+                {{$Option.Description}}
+                {{else}}
+                {{$Option.ReplyText}}
+                {{end}}
+              </span>
+            </div>
+          </a>
+          {{end}}
         </td>
       </tr>
     </table>
