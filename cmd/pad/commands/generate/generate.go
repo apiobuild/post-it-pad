@@ -13,6 +13,8 @@ const (
 	layoutDirVarShort = "d"
 	destPathVar       = "destPath"
 	destPathVarShort  = "o"
+	argsPathVar       = "args"
+	argsPathVarShort  = "a"
 	serveVar          = "serve"
 	serveVarShort     = "s"
 	portVar           = "port"
@@ -23,10 +25,12 @@ var (
 	layout    string
 	layoutDir string
 	destPath  string
+	argsPath  string
 	serve     bool
 	port      int
 )
 
+// Command defines the generate command
 var Command = &cobra.Command{
 	Use:   "generate",
 	Short: "Generate templated email html",
@@ -36,7 +40,9 @@ var Command = &cobra.Command{
 		g := generate.NewGenerator(
 			defaultStringValueOrNil(layoutDir),
 			defaultStringValueOrNil(layout),
-			defaultStringValueOrNil(destPath))
+			defaultStringValueOrNil(destPath),
+			defaultStringValueOrNil(argsPath),
+		)
 		g.Generate()
 	},
 }
@@ -55,11 +61,15 @@ func init() {
 
 	Command.PersistentFlags().StringVarP(&layoutDir, layoutDirVar, layoutDirVarShort, "",
 		"Specify layout director.")
-	viper.BindPFlag(layoutVar, Command.PersistentFlags().Lookup(layoutVar))
+	viper.BindPFlag(layoutVar, Command.PersistentFlags().Lookup(layoutDirVar))
 
 	Command.PersistentFlags().StringVarP(&destPath, destPathVar, destPathVarShort, "",
 		"Specify the path to write generated html to.")
 	viper.BindPFlag(destPathVar, Command.PersistentFlags().Lookup(destPathVar))
+
+	Command.PersistentFlags().StringVarP(&argsPath, argsPathVar, argsPathVarShort, "",
+		"Specify args json file path.")
+	viper.BindPFlag(layoutVar, Command.PersistentFlags().Lookup(argsPathVar))
 
 	Command.PersistentFlags().BoolVarP(&serve, serveVar, serveVarShort, false,
 		"Serve and preview.")

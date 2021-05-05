@@ -1,15 +1,29 @@
 package generate
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"os"
 	"path"
+
+	"github.com/apiobuild/post-it-pad/pkg/generate/args"
+)
+
+// LayoutNameEnum is the layout name enum type
+type LayoutNameEnum string
+
+// Layout Names
+const (
+	Receipt LayoutNameEnum = "receipt"
+	Reply   LayoutNameEnum = "reply"
 )
 
 // Default constants
 const (
 	defaultHTML          = "default.html"
+	defaultArgsJSONFile  = "args.json"
 	sharedDir            = "shared"
 	LayoutDirNotFound    = "Layout Directory Not Found"
 	LayoutNotFoundError  = "Layout Not Found"
@@ -61,6 +75,41 @@ func (g *Generator) getSharedTemplate(layoutName string) (t *template.Template, 
 	return
 }
 
+func (g Generator) getOrDefaultArgsPath(layoutName string) (argsPath string) {
+	if g.ArgsPath == nil {
+		argsPath = path.Join(g.LayoutDir, layoutName, defaultArgsJSONFile)
+		g.ArgsPath = &argsPath
+		return
+	}
+	argsPath = *g.ArgsPath
+	return
+}
+
+func (g *Generator) loadArgs(layoutName string, args interface{}) (err error) {
+	argsPath := g.getOrDefaultArgsPath(layoutName)
+	g.getLogFields(nil).Infof("Reading args json file from %s", argsPath)
+	jsonFile, err := os.Open(argsPath)
+	if err != nil {
+		g.getLogFields(err).Info("Error reading args json file")
+		return
+	}
+
+	defer jsonFile.Close()
+
+	b, _ := ioutil.ReadAll(jsonFile)
+	json.Unmarshal(b, &args)
+	g.Args = args
+	return
+}
+
+func layoutNameArgsStructLookup(layoutName string) (argsVal interface{}) {
+	switch layoutName {
+	case string(Receipt):
+		argsVal = &args.ReceiptArgs{}
+	}
+	return
+}
+
 // GetTemplateByLayout reads layout and shared directory to create base template
 func (g Generator) GetTemplateByLayout(layoutName string) (err error) {
 	if err = checkLayoutDir(g.LayoutDir); err != nil {
@@ -86,6 +135,12 @@ func (g Generator) GetTemplateByLayout(layoutName string) (err error) {
 		err = templateErrorGenerator(layoutName, ParseLayoutError)
 		return
 	}
+
+	if err = g.loadArgs(layoutName, layoutNameArgsStructLookup(layoutName)); err != nil {
+		return
+	}
+
+	g.getLogFields(nil).Infof("Generate with args: %v", g.Args)
 
 	if err = t.ExecuteTemplate(g.HTML, defaultHTML, g.Args); err != nil {
 		g.getLogFields(err).Error("Error creating template")

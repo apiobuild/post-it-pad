@@ -28,9 +28,7 @@
         {{ if .ToEmail.Name }} Hello {{ Title .ToEmail.Name }}{{else}}Hi
         There{{end}}!
       </h3>
-      <p class="lead">
-        {{ if .DescriptionHTML }} {{ .DescriptionHTML }} {{ end }}
-      </p>
+      <p class="lead">{{ if .ContentHTML }} {{ .ContentHTML }} {{ end }}</p>
     </td>
   </tr>
 
