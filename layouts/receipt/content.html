@@ -72,7 +72,7 @@
           <td class="item" align="right">$</td>
           <td class="item" align="right">{{.Total.SubTotal}}</td>
         </tr>
-        {{ if CheckSkip .Total.Discount }}
+        {{ if not (CheckSkip .Total.Discount) }}
         <tr>
           <td class="item" align="right" colspan="2">Discount</td>
           <td class="item" align="right">$</td>
@@ -80,7 +80,7 @@
             - {{.Total.Discount}}
           </td>
         </tr>
-        {{ end }} {{ if CheckSkip .Total.OrderShipping }}
+        {{ end }} {{ if not (CheckSkip .Total.OrderShipping) }}
         <tr>
           <td class="item" align="right" colspan="2">
             Shipping ({{.Total.OrderShippingOption}})
@@ -88,7 +88,7 @@
           <td class="item" align="right">$</td>
           <td class="item" align="right">{{.Total.OrderShipping}}</td>
         </tr>
-        {{ end }} {{ if CheckSkip .Total.TaxRate }}
+        {{ end }} {{ if not (CheckSkip .Total.TaxRate) }}
         <tr>
           <td class="item" align="right" colspan="2">
             Tax ({{.Total.TaxRate}}%)

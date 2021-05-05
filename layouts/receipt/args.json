@@ -1,6 +1,34 @@
 {
     "subject": "Example Receipt Layout",
+    "order_number": "123456",
+    "order_created": "2020-01-01",
     "to": {
-        "name": "Lulu"
+        "name": "Customer",
+        "email": "customer@email.com"
+    },
+    "from": {
+        "name": "Store",
+        "email": "store@email.com"
+    },
+    "items": [
+        {
+            "product_nickname": "apple",
+            "product_qty": 5,
+            "product_price": "3.00"
+        },
+        {
+            "product_nickname": "orange",
+            "product_qty": 3,
+            "product_price": "3.25"
+        }
+    ],
+    "total": {
+        "order_subtotal": "24.75",
+        "order_tax_rate": "1",
+        "order_tax": "0.24",
+        "order_discount": "1",
+        "order_total": "23.99",
+        "order_shipping_option": "moon express",
+        "order_shipping": "0"
     }
 }

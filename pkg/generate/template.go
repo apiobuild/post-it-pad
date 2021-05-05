@@ -110,7 +110,9 @@ func (g *Generator) loadArgs(layoutName string, args interface{}) (err error) {
 		}
 	}
 
-	json.Unmarshal(b, &args)
+	if err = json.Unmarshal(b, &args); err != nil {
+		return
+	}
 	g.Args = args
 	return
 }
