@@ -1,5 +1,6 @@
 {
     "subject": "Example Receipt Layout",
+    "content_html": "This is an example receipt email layout",
     "order_number": "123456",
     "order_created": "2020-01-01",
     "to": {
@@ -40,5 +41,11 @@
             "option_text": "Cancel",
             "display_text": "Cancel Order"
         }
-    ]
+    ],
+    "contact_info": {
+        "name": "apio",
+        "email": "apiobuild@gmail.com",
+        "website": "https://apiobuild.com",
+        "logo_url": "https://apiobuild.com/images/logo.png"
+    }
 }

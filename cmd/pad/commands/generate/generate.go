@@ -64,7 +64,7 @@ func init() {
 	viper.BindPFlag(layoutVar, Command.PersistentFlags().Lookup(layoutVar))
 
 	Command.PersistentFlags().StringVarP(&layoutDir, layoutDirVar, layoutDirVarShort, "",
-		"Path to layout director.")
+		"Path to layout directory.")
 	viper.BindPFlag(layoutVar, Command.PersistentFlags().Lookup(layoutDirVar))
 
 	Command.PersistentFlags().StringVarP(&destPath, destPathVar, destPathVarShort, "",
