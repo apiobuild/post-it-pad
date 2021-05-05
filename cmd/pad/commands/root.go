@@ -20,7 +20,7 @@ var version = &cobra.Command{
 	Short: "Print the version number of Pad",
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO: update
-		fmt.Println("Hugo Static Site Generator v0.9 -- HEAD")
+		// fmt.Println("Hugo Static Site Generator v0.9 -- HEAD")
 	},
 }
 
