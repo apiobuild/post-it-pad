@@ -24,7 +24,7 @@
         {{ end }}!
       </h3>
       <p class="lead">
-        {{ if .DescriptionHTML }} {{ .DescriptionHTML }} {{ end }}
+        {{ if .ContentHTML }} {{ .ContentHTML }} {{ end }}
       </p>
       <table class="content options" style="display: table">
         {{ range $i, $announcement := .Announcements }}
