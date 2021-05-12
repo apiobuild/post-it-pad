@@ -1,5 +1,4 @@
 {{template "header-1.html" .}}
-
 <table class="body-wrap">
   {{ template "greetings-1.html" .}}
   <tr class="container">
@@ -15,7 +14,6 @@
               <h4>{{$announcement.Title}}</h4>
               <p>{{$announcement.Description}}</p>
               {{if $announcement.Link}}
-
               <a href="{{ $announcement.Link }}">
                 <span
                   class="btn"
