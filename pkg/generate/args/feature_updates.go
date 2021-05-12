@@ -2,10 +2,20 @@ package args
 
 import "html/template"
 
+// StyleEnum is the style enum types
+type StyleEnum string
+
+// Styles
+const (
+	LeftRight  StyleEnum = "left-right"
+	LargeImage StyleEnum = "large-image"
+)
+
 // FeatureUpdatesArgs is the default args for feature-updates layout
 type FeatureUpdatesArgs struct {
 	SharedArgs
 	Announcements []Announcement `json:"announcements"`
+	Style         StyleEnum      `json:"style"`
 }
 
 // Announcement ...

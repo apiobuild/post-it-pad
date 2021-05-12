@@ -19,7 +19,8 @@
         {
             "title": "Bye Bye World",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi mi, tempus eget nibh ut, sodales suscipit augue. Integer diam.",
-            "image_url": "https://media.giphy.com/media/LSWoSypZ4uKd7DvHP8/giphy.gif"
+            "image_url": "https://media.giphy.com/media/LSWoSypZ4uKd7DvHP8/giphy.gif",
+            "link": "https://apiobuild.com"
         }
     ],
     "end_content_html": "Have questions? Looking for more features? Reply to this email or <a href=\"https://calendly.com/apiobuild\" target=\"_blank\">find a time to chat</a>. 🚀🚀",

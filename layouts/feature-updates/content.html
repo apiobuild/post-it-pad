@@ -4,31 +4,12 @@
   <tr class="container">
     <td class="container">
       <table class="content options" style="display: table">
+        {{.Style}}
         {{ range $i, $announcement := .Announcements }}
         <tr>
           <td>
-            <div class="column option">
-              <img src="{{$announcement.ImageURL}}" style="width: 90%" />
-            </div>
-            <div class="column option" style="text-align: left">
-              <h4>{{$announcement.Title}}</h4>
-              <p>{{$announcement.Description}}</p>
-              {{if $announcement.Link}}
-              <a href="{{ $announcement.Link }}">
-                <span
-                  class="btn"
-                  style="
-                    color: black;
-                    background-color: white;
-                    border: 1px solid #5bc0de;
-                    border-radius: 5px;
-                  "
-                >
-                  Read More
-                </span>
-              </a>
-              {{end}}
-            </div>
+            {{ if eq $.Style "left-right"}} {{template "left-right.html" $announcement}}
+            {{else}} {{template "large-image.html" $announcement}} {{end}}
           </td>
         </tr>
         {{ end }}
