@@ -1,6 +1,8 @@
 vendor/
 .vscode/
-*-creds.json
+.git/
+.github/
+creds.json
 swagger.json
 pad
 cp.out

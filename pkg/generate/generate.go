@@ -21,7 +21,7 @@ type Generator struct {
 // Default values when not provided
 const (
 	DefaultLayoutDir = "./layouts"
-	DefaultDestPath  = "./generated.html"
+	DefaultDestPath  = "./output/generated.html"
 	// DefaultArgsPath  = "./args.json"
 	// DefaultLayoutDir = "../../layouts"
 	// DefaultDestPath = "../../generated.html"
