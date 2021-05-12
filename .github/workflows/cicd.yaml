@@ -49,7 +49,7 @@ jobs:
           file: ./Dockerfile
           tags: ${{ steps.get_image_tag.outputs.tags }}
           secrets: |
-            GIT_AUTH_TOKEN=${TOKEN}
+            GIT_AUTH_TOKEN=${{ env.TOKEN }}
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
