@@ -47,12 +47,12 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          tags: ${{ steps.prep.outputs.tags }}
+          tags: ${{ steps.get_image_tag.outputs.tags }}
           secrets: |
-            GIT_AUTH_TOKEN=${TOKEN}
-          # push: ${{ startsWith(github.ref, 'refs/tags/') ||  startsWith(github.ref, 'refs/heads/develop') }}
-          push: true
+            GIT_AUTH_TOKEN=${TOKEN}]
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
             org.opencontainers.image.revision=${{ github.sha }}
+          # push: ${{ startsWith(github.ref, 'refs/tags/') ||  startsWith(github.ref, 'refs/heads/develop') }}
+          push: true
