@@ -22,15 +22,7 @@
 </table>
 
 <table class="body-wrap">
-  <tr>
-    <td class="container" bgcolor="#FFFFFF" align="center">
-      <h3>
-        {{ if .ToEmail.Name }} Hello {{ Title .ToEmail.Name }}{{else}}Hi
-        There{{end}}!
-      </h3>
-      <p class="lead">{{ if .ContentHTML }} {{ .ContentHTML }} {{ end }}</p>
-    </td>
-  </tr>
+  {{ template "greetings-1.html" }}
 
   <tr class="container">
     <td class="container td-items">

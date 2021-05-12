@@ -4,12 +4,14 @@ import "html/template"
 
 // SharedArgs ...
 type SharedArgs struct {
-	FromEmail      EmailAddress  `json:"from"`
-	ToEmail        EmailAddress  `json:"to"`
-	Subject        string        `json:"subject"`
-	HeaderImageURL string        `json:"header_image_url"`
-	ContentHTML    template.HTML `json:"content_html"`
-	ContactInfo    *ContactInfo  `json:"contact_info"`
+	FromEmail                 EmailAddress  `json:"from"`
+	ToEmail                   EmailAddress  `json:"to"`
+	Subject                   string        `json:"subject"`
+	HeaderImageURL            string        `json:"header_image_url"`
+	TopContentHTML            template.HTML `json:"top_content_html"`
+	EndContentHTML            template.HTML `json:"end_content_html"`
+	ContactInfo               *ContactInfo  `json:"contact_info"`
+	UnsubscribeDisclaimerText string        `json:"unsubscribe_disclaimer_text"`
 }
 
 // EmailAddress ...

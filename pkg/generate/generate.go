@@ -47,7 +47,7 @@ func NewGenerator(layoutDir *string, layoutName *string, destPath *string, argsP
 		HTML:       new(bytes.Buffer),
 	}
 	g.getLogFields(nil).Info("New email generator created")
-	return
+return
 }
 
 func (g Generator) isGenerateAll() bool {

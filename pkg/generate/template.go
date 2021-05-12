@@ -16,8 +16,9 @@ type LayoutNameEnum string
 
 // Layout Names
 const (
-	Receipt LayoutNameEnum = "receipt"
-	Reply   LayoutNameEnum = "reply"
+	Receipt        LayoutNameEnum = "receipt"
+	FeatureUpdates LayoutNameEnum = "feature-updates"
+	Reply          LayoutNameEnum = "reply"
 )
 
 // Default constants
@@ -121,6 +122,8 @@ func layoutNameArgsStructLookup(layoutName string) (argsVal interface{}) {
 	switch layoutName {
 	case string(Receipt):
 		argsVal = &args.ReceiptArgs{}
+	case string(FeatureUpdates):
+		argsVal = &args.FeatureUpdatesArgs{}
 	}
 	return
 }

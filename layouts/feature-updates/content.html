@@ -5,8 +5,8 @@
         <table bgcolor="#FFFFFF">
           <tr>
             <td>
-              {{ if .HeaderImage }}
-              <img src="{{.HeaderImage}}" style="width: 100%" />
+              {{ if .HeaderImageURL }}
+              <img src="{{.HeaderImageURL}}" style="width: 100%" />
               {{ end }}
             </td>
           </tr>
@@ -17,15 +17,9 @@
 </table>
 
 <table class="body-wrap">
+  {{ template "greetings-1.html" .}}
   <tr>
     <td class="container" bgcolor="#FFFFFF">
-      <h3 style="text-align: center">
-        {{ if .ToEmail.Name }} Hello {{ Title .ToEmail.Name }}{{else}}Hi There
-        {{ end }}!
-      </h3>
-      <p class="lead">
-        {{ if .ContentHTML }} {{ .ContentHTML }} {{ end }}
-      </p>
       <table class="content options" style="display: table">
         {{ range $i, $announcement := .Announcements }}
         <tr>
@@ -59,24 +53,17 @@
       </table>
     </td>
   </tr>
+  {{if .EndContentHTML}}
   <tr>
     <td class="container" bgcolor="#FFFFFF" style="padding-top: 30px">
-      <p class="lead">
-        Have questions? Looking for more features? Reply to this email or chat
-        with us on facebook. 🚀🚀
-      </p>
+      <p class="lead">{{ .EndContentHTML }}</p>
     </td>
   </tr>
+  {{end}}
   <tr>
     <td class="divider">
       <hr />
     </td>
   </tr>
-  {{template "footer" .}}
-  <tr>
-    <td class="container" bgcolor="#FFFFFF">
-      You are receiving this email because you signed up to apio. If you'd like
-      to unsubscribe, reply to this email with 'Unsubscribe'.
-    </td>
-  </tr>
+  {{template "signature-1.html" .}}
 </table>

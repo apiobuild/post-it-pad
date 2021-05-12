@@ -1,0 +1,32 @@
+{
+    "subject": "Example Feature Update Layout",
+    "top_content_html": "This is an example feature update email layout",
+    "header_image_url": "https://visionviral.com/wp-content/uploads/2021/02/KYM-Insights-The-GameStop-Short-Squeeze-And-Impact-Of-WallStreetBets.jpg",
+    "to": {
+        "name": "Client",
+        "email": "client@email.com"
+    },
+    "from": {
+        "name": "Service",
+        "email": "service@email.com"
+    },
+    "announcements": [
+        {
+            "title": "Hello World",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi mi, tempus eget nibh ut, sodales suscipit augue. Integer diam.",
+            "image_url": "https://media.giphy.com/media/YNCfs2IaWO52ZhygCN/giphy.gif"
+        },
+        {
+            "title": "Bye Bye World",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi mi, tempus eget nibh ut, sodales suscipit augue. Integer diam.",
+            "image_url": "https://media.giphy.com/media/LSWoSypZ4uKd7DvHP8/giphy.gif"
+        }
+    ],
+    "end_content_html": "Have questions? Looking for more features? Reply to this email or <a href=\"https://calendly.com/apiobuild\" target=\"_blank\">find a time to chat</a>. 🚀🚀",
+    "contact_info": {
+        "name": "apio",
+        "email": "apiobuild@gmail.com",
+        "website": "https://apiobuild.com",
+        "logo_url": "https://apiobuild.com/images/logo.png"
+    }
+}
