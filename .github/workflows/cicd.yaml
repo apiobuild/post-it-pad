@@ -45,6 +45,8 @@ jobs:
         env:
           TOKEN: ${{ steps.deploy_app_token.outputs.token }}
         with:
+          context: .
+          file: ./Dockerfile
           tags: ${{ steps.prep.outputs.tags }}
           secrets: |
             GIT_AUTH_TOKEN=${TOKEN}
