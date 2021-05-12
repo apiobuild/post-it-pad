@@ -1,3 +1,8 @@
+<tr>
+  <td class="divider">
+    <hr />
+  </td>
+</tr>
 <!-- social & contact -->
 <tr class="social">
   <td>
@@ -68,6 +73,8 @@
   </td>
 </tr>
 <!-- disclaimer -->
+{{if .UnsubscribeDisclaimerText}}
 <tr>
-  <td class="container" bgcolor="#FFFFFF">{{ .UnsubscribeDisclaimerText}}</td>
+  <td class="container" align="center">{{ .UnsubscribeDisclaimerText}}</td>
 </tr>
+{{end}}

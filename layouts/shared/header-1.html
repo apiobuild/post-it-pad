@@ -1,0 +1,17 @@
+<table class="head-wrap" bgcolor="#FFFFFF">
+  <tr>
+    <td class="header container">
+      {{if .HeaderImageURL}}
+      <div
+        class="content"
+        style="
+          background: url('{{.HeaderImageURL}}');
+          background-size: auto;
+          background-repeat: no-repeat;
+          height: 300px;
+        "
+      />
+      {{end}}
+    </td>
+  </tr>
+</table>

@@ -26,7 +26,10 @@
     "contact_info": {
         "name": "apio",
         "email": "apiobuild@gmail.com",
+        "instagram": "https://instagram.com/apiobuild",
+        "facebook": "https://www.facebook.com/apiobuild",
         "website": "https://apiobuild.com",
-        "logo_url": "https://apiobuild.com/images/logo.png"
-    }
+        "logo_url": "https://raw.githubusercontent.com/apiobuild/apiobuild.github.io/develop/static/images/logo_white_sq.png"
+    },
+    "unsubscribe_disclaimer_text": "You are receiving this email because you signed up on apiobuild.com. If you'd like to unsubscribe, reply to this email with 'Unsubscribe'."
 }

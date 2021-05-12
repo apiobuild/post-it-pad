@@ -1,6 +1,7 @@
 {
     "subject": "Example Receipt Layout",
-    "content_html": "This is an example receipt email layout",
+    "top_content_html": "This is an example receipt email layout",
+    "header_image_url": "https://i.ibb.co/QjWfz14/order-confirmation-1.png",
     "order_number": "123456",
     "order_created": "2020-01-01",
     "to": {
@@ -46,6 +47,7 @@
         "name": "apio",
         "email": "apiobuild@gmail.com",
         "website": "https://apiobuild.com",
-        "logo_url": "https://apiobuild.com/images/logo.png"
-    }
+        "logo_url": "https://raw.githubusercontent.com/apiobuild/apiobuild.github.io/develop/static/images/logo_white_sq.png"
+    },
+    "unsubscribe_disclaimer_text": "You are receiving this email because you have recently placed an order on apio."
 }

@@ -1,25 +1,9 @@
-<table class="head-wrap" bgcolor="#FFFFFF">
-  <tr>
-    <td class="header container">
-      <div class="content">
-        <table bgcolor="#FFFFFF">
-          <tr>
-            <td>
-              {{ if .HeaderImageURL }}
-              <img src="{{.HeaderImageURL}}" style="width: 100%" />
-              {{ end }}
-            </td>
-          </tr>
-        </table>
-      </div>
-    </td>
-  </tr>
-</table>
+{{template "header-1.html" .}}
 
 <table class="body-wrap">
   {{ template "greetings-1.html" .}}
-  <tr>
-    <td class="container" bgcolor="#FFFFFF">
+  <tr class="container">
+    <td class="container">
       <table class="content options" style="display: table">
         {{ range $i, $announcement := .Announcements }}
         <tr>
@@ -59,11 +43,5 @@
       <p class="lead">{{ .EndContentHTML }}</p>
     </td>
   </tr>
-  {{end}}
-  <tr>
-    <td class="divider">
-      <hr />
-    </td>
-  </tr>
-  {{template "signature-1.html" .}}
+  {{end}} {{template "signature-1.html" .}}
 </table>

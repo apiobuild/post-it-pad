@@ -1,29 +1,6 @@
-<table class="head-wrap" bgcolor="#FFFFFF">
-  <tr>
-    <td class="header container">
-      <div
-        class="content"
-        style="
-          background: url('https://i.ibb.co/QjWfz14/order-confirmation-1.png');
-          background-size: auto;
-          background-repeat: no-repeat;
-        "
-      >
-        <table>
-          <tr>
-            <td align="center">
-              <h1 style="margin: 80px 0px">Thank You!</h1>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </td>
-  </tr>
-</table>
-
+{{template "header-1.html" .}}
 <table class="body-wrap">
-  {{ template "greetings-1.html" }}
-
+  {{ template "greetings-1.html" .}}
   <tr class="container">
     <td class="container td-items">
       <table
