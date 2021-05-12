@@ -20,11 +20,10 @@ type Generator struct {
 
 // Default values when not provided
 const (
+	// NOTE: for local testing
+	// DefaultLayoutDir = "../../layouts"
 	DefaultLayoutDir = "./layouts"
 	DefaultDestPath  = "./output/generated.html"
-	// DefaultArgsPath  = "./args.json"
-	// DefaultLayoutDir = "../../layouts"
-	// DefaultDestPath = "../../generated.html"
 )
 
 func getStringOrDefault(val *string, defaultVal string) (useVal string) {
@@ -47,7 +46,7 @@ func NewGenerator(layoutDir *string, layoutName *string, destPath *string, argsP
 		HTML:       new(bytes.Buffer),
 	}
 	g.getLogFields(nil).Info("New email generator created")
-return
+	return
 }
 
 func (g Generator) isGenerateAll() bool {

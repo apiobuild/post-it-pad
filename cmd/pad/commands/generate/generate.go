@@ -17,10 +17,6 @@ const (
 	argsPathVarShort  = "a"
 	argsVar           = "json"
 	argsVarShort      = "j"
-	serveVar          = "serve"
-	serveVarShort     = "s"
-	portVar           = "port"
-	portVarShort      = "p"
 )
 
 var (
@@ -29,8 +25,6 @@ var (
 	destPath  string
 	argsPath  string
 	argsJSON  string
-	serve     bool
-	port      int
 )
 
 // Command defines the generate command
@@ -78,12 +72,4 @@ func init() {
 	Command.PersistentFlags().StringVarP(&argsJSON, argsVar, argsVarShort, "",
 		"Specify args json directly.")
 	viper.BindPFlag(argsVar, Command.PersistentFlags().Lookup(argsPathVar))
-
-	Command.PersistentFlags().BoolVarP(&serve, serveVar, serveVarShort, false,
-		"Serve and preview.")
-	viper.BindPFlag(serveVar, Command.PersistentFlags().Lookup(serveVar))
-
-	Command.PersistentFlags().IntVarP(&port, portVar, portVarShort, 8080,
-		"Port to serve to, default to 8080.")
-	viper.BindPFlag(portVar, Command.PersistentFlags().Lookup(portVar))
 }
