@@ -45,7 +45,6 @@ jobs:
         env:
           TOKEN: ${{ steps.deploy_app_token.outputs.token }}
         with:
-          repository: apiobuild/post-it-pad
           tags: ${{ steps.prep.outputs.tags }}
           secrets: |
             GIT_AUTH_TOKEN=${TOKEN}
