@@ -11,10 +11,10 @@ jobs:
     steps:
       - name: Get Github Deploy App Token
         id: deploy_app_token
-        uses: bubkoo/use-app-token@v1
+        uses: getsentry/action-github-app-token@v1
         with:
-          app_id: ${{ secrets._GITHUB_DEPLOY_APP_ID }}
-          private_key: ${{ secrets._GITHUB_DEPLOY_APP_KEY }}]
+          app_id: ${{ secrets._GITHUB_ACCESS_APP_ID }}
+          private_key: ${{ secrets._GITHUB_ACCESS_APP_PRIVATE_KEY }}]
       - name: Get Docker Image Tag
         id: get_image_tag
         run: |
