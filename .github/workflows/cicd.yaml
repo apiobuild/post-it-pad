@@ -9,8 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     name: build docker container
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: Get Github Deploy App Token
         id: deploy_app_token
         uses: tibdex/github-app-token@v1
@@ -36,6 +34,8 @@ jobs:
           echo ::set-output name=version::${VERSION}
           echo ::set-output name=tags::${TAGS}
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: build and publish docker image
         uses: docker/build-push-action@v2
         env:
