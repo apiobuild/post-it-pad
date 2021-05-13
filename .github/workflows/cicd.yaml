@@ -34,6 +34,11 @@ jobs:
           echo ::set-output name=version::${VERSION}
           echo ::set-output name=tags::${TAGS}
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+      - name: Echo Token
+        env:
+          TOKEN: ${{ steps.deploy_app_token.outputs.token }}
+        run: |
+          echo ${{ env.TOKEN }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
