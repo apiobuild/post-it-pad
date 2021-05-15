@@ -79,7 +79,7 @@ func (g Generator) writeToFile(destPath *string) (err error) {
 	if destPath != nil {
 		useDestPath = path.Join(DefaultDestDir, fmt.Sprintf("generated-%s.html", *destPath))
 	}
-	g.getLogFields(nil).Info("Writing generated html to file to", useDestPath)
+	g.getLogFields(nil).Info("Writing generated html to file to ", useDestPath)
 	// NOTE: 0755: overwrite
 	err = ioutil.WriteFile(useDestPath, g.HTML.Bytes(), 0755)
 	return

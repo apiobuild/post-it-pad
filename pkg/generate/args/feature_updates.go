@@ -29,8 +29,9 @@ type Announcement struct {
 
 func (f *FeatureUpdatesArgs) Process() (err error) {
 	f.SharedArgs.Process()
-	for _, a := range f.Announcements {
+	for i, a := range f.Announcements {
 		a.Process()
+		f.Announcements[i] = a
 	}
 	return
 }

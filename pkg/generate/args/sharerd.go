@@ -1,6 +1,8 @@
 package args
 
-import "html/template"
+import (
+	"html/template"
+)
 
 type ArgsI interface {
 	Process() (err error)
@@ -14,10 +16,10 @@ type SharedArgs struct {
 	HeaderImageURL                string        `json:"header_image_url"`
 	TopContentMarkdown            Markdown      `json:"top_content"`
 	TopContentHTML                template.HTML `json:"-"`
-	EndContentMarkdown            Markdown      `json:"end_content_html"`
+	EndContentMarkdown            Markdown      `json:"end_content"`
 	EndContentHTML                template.HTML `json:"-"`
 	ContactInfo                   *ContactInfo  `json:"contact_info"`
-	UnsubscribeDisclaimerMarkdown Markdown      `json:"unsubscribe_disclaimer_text"`
+	UnsubscribeDisclaimerMarkdown Markdown      `json:"unsubscribe_disclaimer"`
 	UnsubscribeDisclaimerHTML     template.HTML `json:"-"`
 }
 

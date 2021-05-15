@@ -99,7 +99,7 @@ func (g Generator) getArgsBytesFromFile(layoutName string) (b []byte, err error)
 	return
 }
 
-func (g *Generator) loadArgs(layoutName string, args interface{}) (err error) {
+func (g *Generator) loadArgs(layoutName string, args args.ArgsI) (err error) {
 	var b []byte
 	if g.ArgsJSON != nil {
 		g.getLogFields(nil).Info("Reading args json from input")
@@ -113,6 +113,9 @@ func (g *Generator) loadArgs(layoutName string, args interface{}) (err error) {
 	if err = json.Unmarshal(b, &args); err != nil {
 		return
 	}
+	if err = args.Process(); err != nil {
+		return
+	}
 	g.Args = args
 	return
 }
@@ -124,12 +127,11 @@ func layoutNameArgsStructLookup(layoutName string) (argsVal args.ArgsI, err erro
 	case string(FeatureUpdates):
 		argsVal = &args.FeatureUpdatesArgs{}
 	}
-	err = argsVal.Process()
 	return
 }
 
 // GetTemplateByLayout reads layout and shared directory to create base template
-func (g Generator) GetTemplateByLayout(layoutName string) (err error) {
+func (g *Generator) GetTemplateByLayout(layoutName string) (err error) {
 	g.getLogFields(nil).Info("Generate layout ", layoutName)
 
 	if err = checkLayoutDir(g.LayoutDir); err != nil {

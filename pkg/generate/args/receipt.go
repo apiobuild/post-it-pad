@@ -11,7 +11,7 @@ type ReceiptArgs struct {
 	Options       []Option `json:"options"`
 }
 
-func (r ReceiptArgs) Process() (err error) {
+func (r *ReceiptArgs) Process() (err error) {
 	r.SharedArgs.Process()
 	return
 }

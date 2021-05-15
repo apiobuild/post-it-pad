@@ -19,7 +19,7 @@ func (m Markdown) process() (output template.HTML, err error) {
 		),
 	)
 	var buf bytes.Buffer
-	if err = md.Convert([]byte(m), &buf); err != nil {
+	if err = md.Convert([]byte(string(m)), &buf); err != nil {
 		return
 	}
 	output = template.HTML(buf.String())

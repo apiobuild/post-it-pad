@@ -2,9 +2,7 @@
   <img src="{{$.ImageURL}}" style="width: 90%" />
 </div>
 <div class="column option" style="text-align: left">
-  <h4>{{.Title}}</h4>
-  <p>{{.DescriptionHTML}}</p>
-  {{if .Link}}
+  {{.DescriptionHTML}} {{if .Link}}
   <a href="{{ $.Link }}">
     <span
       class="btn"
