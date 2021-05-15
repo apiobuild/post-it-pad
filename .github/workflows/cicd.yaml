@@ -39,7 +39,7 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Build image
         run: |
-          docker build . --file Dockerfile --tag ${{ steps.get_image_tag.outputs.tags }} \
+          docker build . --file Dockerfile --tag ${{ steps.get_image_tag.outputs.tags }}
             --label "org.opencontainers.image.source=${{ github.event.repository.html_url }}"
             --label "org.opencontainers.image.created=${{ steps.get_image_tag.outputs.created }}"
             --label "org.opencontainers.image.revision=${{ github.sha }}"
