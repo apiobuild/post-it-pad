@@ -13,7 +13,7 @@ jobs:
         id: get_image_tag
         run: |
           REGISTRY=ghcr.io
-          DOCKER_IMAGE=${REGISTRY}/apiobuild/post-it-pad
+          DOCKER_IMAGE=${REGISTRY}/${{ github.repository }}/${{ github.event.repository.name }}
           VERSION=edge
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/}
