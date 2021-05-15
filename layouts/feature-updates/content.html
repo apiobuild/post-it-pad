@@ -4,7 +4,6 @@
   <tr class="container">
     <td class="container">
       <table class="content options" style="display: table">
-        {{.Style}}
         {{ range $i, $announcement := .Announcements }}
         <tr>
           <td>
@@ -18,7 +17,7 @@
   </tr>
   {{if .EndContentHTML}}
   <tr>
-    <td class="container" bgcolor="#FFFFFF" style="padding-top: 30px">
+    <td class="container" style="padding-top: 30px">
       <p class="lead">{{ .EndContentHTML }}</p>
     </td>
   </tr>

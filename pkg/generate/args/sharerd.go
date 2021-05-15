@@ -2,16 +2,39 @@ package args
 
 import "html/template"
 
+type ArgsI interface {
+	Process() (err error)
+}
+
 // SharedArgs ...
 type SharedArgs struct {
-	FromEmail                 EmailAddress  `json:"from"`
-	ToEmail                   EmailAddress  `json:"to"`
-	Subject                   string        `json:"subject"`
-	HeaderImageURL            string        `json:"header_image_url"`
-	TopContentHTML            template.HTML `json:"top_content_html"`
-	EndContentHTML            template.HTML `json:"end_content_html"`
-	ContactInfo               *ContactInfo  `json:"contact_info"`
-	UnsubscribeDisclaimerText string        `json:"unsubscribe_disclaimer_text"`
+	FromEmail                     EmailAddress  `json:"from"`
+	ToEmail                       EmailAddress  `json:"to"`
+	Subject                       string        `json:"subject"`
+	HeaderImageURL                string        `json:"header_image_url"`
+	TopContentMarkdown            Markdown      `json:"top_content"`
+	TopContentHTML                template.HTML `json:"-"`
+	EndContentMarkdown            Markdown      `json:"end_content_html"`
+	EndContentHTML                template.HTML `json:"-"`
+	ContactInfo                   *ContactInfo  `json:"contact_info"`
+	UnsubscribeDisclaimerMarkdown Markdown      `json:"unsubscribe_disclaimer_text"`
+	UnsubscribeDisclaimerHTML     template.HTML `json:"-"`
+}
+
+func (s *SharedArgs) Process() (err error) {
+	s.TopContentHTML, err = s.TopContentMarkdown.process()
+	if err != nil {
+		return
+	}
+	s.EndContentHTML, err = s.EndContentMarkdown.process()
+	if err != nil {
+		return
+	}
+	s.UnsubscribeDisclaimerHTML, err = s.UnsubscribeDisclaimerMarkdown.process()
+	if err != nil {
+		return
+	}
+	return
 }
 
 // EmailAddress ...

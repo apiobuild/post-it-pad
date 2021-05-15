@@ -2,7 +2,9 @@ package generate
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
+	"path"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -23,6 +25,7 @@ const (
 	// NOTE: for local testing
 	// DefaultLayoutDir = "../../layouts"
 	DefaultLayoutDir = "./layouts"
+	DefaultDestDir   = "./output"
 	DefaultDestPath  = "./output/generated.html"
 )
 
@@ -54,6 +57,16 @@ func (g Generator) isGenerateAll() bool {
 }
 
 func (g Generator) generateAll() (err error) {
+	for _, layout := range Layouts {
+		if err = g.GetTemplateByLayout(string(layout)); err != nil {
+			return
+		}
+		layoutStr := string(layout)
+		if err = g.writeToFile(&layoutStr); err != nil {
+			g.getLogFields(err).Fatal("Error writing generated html to file")
+			return
+		}
+	}
 	return
 }
 
@@ -61,10 +74,14 @@ func (g Generator) generateByLayout() (err error) {
 	return g.GetTemplateByLayout(*g.LayoutName)
 }
 
-func (g Generator) writeToFile() (err error) {
-	g.getLogFields(nil).Info("Writing generated html to file to", g.DestPath)
+func (g Generator) writeToFile(destPath *string) (err error) {
+	useDestPath := g.DestPath
+	if destPath != nil {
+		useDestPath = path.Join(DefaultDestDir, fmt.Sprintf("generated-%s.html", *destPath))
+	}
+	g.getLogFields(nil).Info("Writing generated html to file to", useDestPath)
 	// NOTE: 0755: overwrite
-	err = ioutil.WriteFile(g.DestPath, g.HTML.Bytes(), 0755)
+	err = ioutil.WriteFile(useDestPath, g.HTML.Bytes(), 0755)
 	return
 }
 
@@ -73,15 +90,15 @@ func (g Generator) Generate() (err error) {
 	if g.isGenerateAll() {
 		g.getLogFields(nil).Info("Generate for all layouts")
 		err = g.generateAll()
-	} else {
-		g.getLogFields(nil).Info("Generate by layout name specified")
-		err = g.generateByLayout()
+		return
 	}
+	g.getLogFields(nil).Info("Generate by layout name specified")
+	err = g.generateByLayout()
 	if err != nil {
 		g.getLogFields(err).Fatal("Error executing email generator")
 		return
 	}
-	if err = g.writeToFile(); err != nil {
+	if err = g.writeToFile(nil); err != nil {
 		g.getLogFields(err).Fatal("Error writing generated html to file")
 		return
 	}
