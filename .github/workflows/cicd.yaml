@@ -12,8 +12,8 @@ jobs:
       - name: Get Docker Image Tag
         id: get_image_tag
         run: |
-          REGISTRY=docker.pkg.github.com
-          DOCKER_IMAGE=${REGISTRY}/apiobuild/post-it-pad/post-it-pad
+          REGISTRY=ghcr.io
+          DOCKER_IMAGE=${REGISTRY}/apiobuild/post-it-padg
           VERSION=edge
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/}
@@ -39,9 +39,9 @@ jobs:
       - name: Login in to registry
         uses: docker/login-action@v1
         with:
-          registry: docker.pkg.github.com
+          registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ github.token }}
+          password: ${{ github._GITHUB_WORKAROUND_TOKEN }}
       - name: Checkout
         uses: actions/checkout@v2
       - name: build and publish docker image
