@@ -12,8 +12,8 @@ jobs:
       - name: Get Docker Image Tag
         id: get_image_tag
         run: |
-          REGISTRY=docker.pkg.github.com
-          DOCKER_IMAGE=${REGISTRY}/apiobuild/post-it-pad/post-it-pad
+          REGISTRY=ghcr.io
+          DOCKER_IMAGE=${REGISTRY}/apiobuild/post-it-pad
           VERSION=edge
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/}
