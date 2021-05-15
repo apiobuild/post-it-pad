@@ -8,7 +8,8 @@ jobs:
   build_container:
     runs-on: ubuntu-latest
     permissions:
-      packages: write 
+      packages: write
+      contents: read
     name: build docker container
     steps:
       - name: Get Docker Image Tag
@@ -38,12 +39,8 @@ jobs:
         uses: docker/setup-buildx-action@v1
         with:
           buildkitd-flags: --debug
-      - name: Login in to registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Checkout
         uses: actions/checkout@v2
       - name: build and publish docker image
