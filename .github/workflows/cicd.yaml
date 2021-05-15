@@ -49,8 +49,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          # tags: ${{ steps.get_image_tag.outputs.tags }}
-          tags: ghcr.io/apiobuild/post-it-pad:latest
+          tags: ${{ steps.get_image_tag.outputs.tags }}
+          # tags: ghcr.io/apiobuild/post-it-pad:latest
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
             org.opencontainers.image.created=${{ steps.get_image_tag.outputs.created }}
