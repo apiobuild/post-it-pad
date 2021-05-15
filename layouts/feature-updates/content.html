@@ -1,0 +1,26 @@
+{{template "header-1.html" .}}
+<table class="body-wrap">
+  {{ template "greetings-1.html" .}}
+  <tr class="container">
+    <td class="container">
+      <table class="content options" style="display: table">
+        {{.Style}}
+        {{ range $i, $announcement := .Announcements }}
+        <tr>
+          <td>
+            {{ if eq $.Style "left-right"}} {{template "left-right.html" $announcement}}
+            {{else}} {{template "large-image.html" $announcement}} {{end}}
+          </td>
+        </tr>
+        {{ end }}
+      </table>
+    </td>
+  </tr>
+  {{if .EndContentHTML}}
+  <tr>
+    <td class="container" bgcolor="#FFFFFF" style="padding-top: 30px">
+      <p class="lead">{{ .EndContentHTML }}</p>
+    </td>
+  </tr>
+  {{end}} {{template "signature-1.html" .}}
+</table>

@@ -1,0 +1,22 @@
+<div class="column option">
+  <img src="{{$.ImageURL}}" style="width: 90%" />
+</div>
+<div class="column option" style="text-align: left">
+  <h4>{{.Title}}</h4>
+  <p>{{.Description}}</p>
+  {{if .Link}}
+  <a href="{{ $.Link }}">
+    <span
+      class="btn"
+      style="
+        color: black;
+        background-color: white;
+        border: 1px solid #5bc0de;
+        border-radius: 5px;
+      "
+    >
+      Read More
+    </span>
+  </a>
+  {{end}}
+</div>

@@ -1,0 +1,53 @@
+{
+    "subject": "Example Receipt Layout",
+    "top_content_html": "This is an example receipt email layout",
+    "header_image_url": "https://i.ibb.co/QjWfz14/order-confirmation-1.png",
+    "order_number": "123456",
+    "order_created": "2020-01-01",
+    "to": {
+        "name": "Customer",
+        "email": "customer@email.com"
+    },
+    "from": {
+        "name": "Store",
+        "email": "store@email.com"
+    },
+    "items": [
+        {
+            "product_nickname": "apple",
+            "product_qty": 5,
+            "product_price": "3.00"
+        },
+        {
+            "product_nickname": "orange",
+            "product_qty": 3,
+            "product_price": "3.25"
+        }
+    ],
+    "total": {
+        "order_subtotal": "24.75",
+        "order_tax_rate": "1",
+        "order_tax": "0.24",
+        "order_discount": "1",
+        "order_total": "23.99",
+        "order_shipping_option": "moon express",
+        "order_shipping": "0"
+    },
+    "options": [
+        {
+            "option_url": "https://apiobuild.com",
+            "display_text": "Go to APIO"
+        },
+        {
+            "option_text": "Cancel",
+            "display_text": "Cancel Order"
+        }
+    ],
+    "contact_info": {
+        "name": "apio",
+        "email": "apiobuild@gmail.com",
+        "website": "https://apiobuild.com",
+        "logo_url": "https://raw.githubusercontent.com/apiobuild/apiobuild.github.io/develop/static/images/logo_white_sq.png"
+    },
+    "unsubscribe_disclaimer_text": "You are receiving this email because you have recently placed an order on apio."
+}

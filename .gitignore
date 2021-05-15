@@ -1,0 +1,7 @@
+vendor/
+.vscode/
+*-creds.json
+swagger.json
+pad
+cp.out
+generated.html
