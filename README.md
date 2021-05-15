@@ -21,7 +21,7 @@ go run ./cmd/pad/main.go generate -h
 Alternatively, use the pre-built docker container to use the cmd:
 
 ```bash
-docker run -v $(pwd)/output:/app/output apiobuild:post-it-pad generate -l receipt
+docker run -v $(pwd)/output:/app/output ghcr.io/apiobuild/post-it-pad generate -l receipt
 ```
 
 ### Build
