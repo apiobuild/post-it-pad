@@ -43,3 +43,5 @@ jobs:
             --label "org.opencontainers.image.source=${{ github.event.repository.html_url }}" \
             --label "org.opencontainers.image.created=${{ steps.get_image_tag.outputs.created }}" \
             --label "org.opencontainers.image.revision=${{ github.sha }}"
+      - name: Push image
+        run: docker push ${{ steps.get_image_tag.outputs.tags }}
