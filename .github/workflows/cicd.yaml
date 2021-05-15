@@ -40,8 +40,8 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ github.token }}
+          username: ${{ github.actor }}
+          password: ${{ secrets._GITHUB_ACCESS_APP_PRIVATE_KEY }}
       - name: Checkout
         uses: actions/checkout@v2
       - name: build and publish docker image
