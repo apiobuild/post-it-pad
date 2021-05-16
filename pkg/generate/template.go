@@ -141,7 +141,7 @@ func (g *Generator) GetTemplateByLayout(layoutName string) (err error) {
 	}
 
 	if _, err = os.Stat(path.Join(g.LayoutDir, layoutName)); os.IsNotExist(err) {
-		g.getLogFields(err).Warn("Layout directory not found")
+		g.getLogFields(err).Error("Layout directory not found")
 		err = templateErrorGenerator(layoutName, LayoutNotFoundError)
 		return
 	}

@@ -59,22 +59,32 @@ func (g Generator) isGenerateAll() bool {
 	return g.LayoutName == nil
 }
 
-func (g Generator) generateAll() (err error) {
-	for _, layout := range Layouts {
-		if err = g.GetTemplateByLayout(string(layout)); err != nil {
-			return
-		}
-		layoutStr := string(layout)
-		if err = g.writeToFile(&layoutStr); err != nil {
-			g.getLogFields(err).Fatal("Error writing generated html to file")
-			return
-		}
+func (g Generator) generateAndWrite(layoutName string) (err error) {
+	g.getLogFields(nil).Infof("Render and for layout %s", layoutName)
+
+	if err = g.GetTemplateByLayout(layoutName); err != nil {
+		return
+	}
+
+	var useFileName *string
+	if g.LayoutName == nil {
+		useFileName = &layoutName
+	}
+
+	if err = g.writeToFile(useFileName); err != nil {
+		g.getLogFields(err).Fatal("Error writing generated html to file")
+		return
 	}
 	return
 }
 
-func (g Generator) generateByLayout() (err error) {
-	return g.GetTemplateByLayout(*g.LayoutName)
+func (g Generator) generateAll() (err error) {
+	for _, layout := range Layouts {
+		if err = g.generateAndWrite(string(layout)); err != nil {
+			break
+		}
+	}
+	return
 }
 
 func (g Generator) writeToFile(filename *string) (err error) {
@@ -97,15 +107,7 @@ func (g Generator) Generate() (err error) {
 		return
 	}
 	g.getLogFields(nil).Info("Generate by layout name specified")
-	err = g.generateByLayout()
-	if err != nil {
-		g.getLogFields(err).Fatal("Error executing email generator")
-		return
-	}
-	if err = g.writeToFile(nil); err != nil {
-		g.getLogFields(err).Fatal("Error writing generated html to file")
-		return
-	}
+	err = g.generateAndWrite(*g.LayoutName)
 	return
 }
 
