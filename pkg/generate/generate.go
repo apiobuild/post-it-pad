@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"path"
 
 	log "github.com/sirupsen/logrus"
@@ -14,6 +15,7 @@ type Generator struct {
 	LayoutDir  string
 	LayoutName *string
 	DestPath   string
+	DestDir    string
 	HTML       *bytes.Buffer
 	ArgsPath   *string
 	ArgsJSON   *string
@@ -39,11 +41,12 @@ func getStringOrDefault(val *string, defaultVal string) (useVal string) {
 }
 
 // NewGenerator creates new templated email generator
-func NewGenerator(layoutDir *string, layoutName *string, destPath *string, argsPath *string, argsJSON *string) (g Generator) {
+func NewGenerator(layoutDir *string, layoutName *string, destPath *string, destDir *string, argsPath *string, argsJSON *string) (g Generator) {
 	g = Generator{
 		LayoutDir:  getStringOrDefault(layoutDir, DefaultLayoutDir),
 		LayoutName: layoutName,
 		DestPath:   getStringOrDefault(destPath, DefaultDestPath),
+		DestDir:    getStringOrDefault(destDir, DefaultDestDir),
 		ArgsPath:   argsPath,
 		ArgsJSON:   argsJSON,
 		HTML:       new(bytes.Buffer),
@@ -74,14 +77,15 @@ func (g Generator) generateByLayout() (err error) {
 	return g.GetTemplateByLayout(*g.LayoutName)
 }
 
-func (g Generator) writeToFile(destPath *string) (err error) {
-	useDestPath := g.DestPath
-	if destPath != nil {
-		useDestPath = path.Join(DefaultDestDir, fmt.Sprintf("generated-%s.html", *destPath))
+func (g Generator) writeToFile(filename *string) (err error) {
+	destPath := g.DestPath
+	if filename != nil {
+		os.MkdirAll(g.DestDir, os.ModePerm)
+		destPath = path.Join(g.DestDir, fmt.Sprintf("generated-%s.html", *filename))
 	}
-	g.getLogFields(nil).Info("Writing generated html to file to ", useDestPath)
+	g.getLogFields(nil).Infof("Writing generated html to file to %s", destPath)
 	// NOTE: 0755: overwrite
-	err = ioutil.WriteFile(useDestPath, g.HTML.Bytes(), 0755)
+	err = ioutil.WriteFile(destPath, g.HTML.Bytes(), 0755)
 	return
 }
 
@@ -109,6 +113,7 @@ func (g Generator) getLogFields(err error) *log.Entry {
 	var fields map[string]interface{} = map[string]interface{}{}
 
 	fields["LayoutDir"] = g.LayoutDir
+	fields["destDir"] = g.DestDir
 	fields["destPath"] = g.DestPath
 
 	if err != nil {

@@ -8,11 +8,13 @@ import (
 
 const (
 	layoutVar         = "layout"
-	layoutVarShort    = "l"
+	layoutVarShort    = "n"
 	layoutDirVar      = "layoutDir"
-	layoutDirVarShort = "d"
+	layoutDirVarShort = "l"
 	destPathVar       = "destPath"
 	destPathVarShort  = "o"
+	destDirVar        = "destDir"
+	destDirVarShort   = "d"
 	argsPathVar       = "args"
 	argsPathVarShort  = "a"
 	argsVar           = "json"
@@ -23,6 +25,7 @@ var (
 	layout    string
 	layoutDir string
 	destPath  string
+	destDir   string
 	argsPath  string
 	argsJSON  string
 )
@@ -38,10 +41,14 @@ var Command = &cobra.Command{
 			defaultStringValueOrNil(layoutDir),
 			defaultStringValueOrNil(layout),
 			defaultStringValueOrNil(destPath),
+			defaultStringValueOrNil(destDir),
 			defaultStringValueOrNil(argsPath),
 			defaultStringValueOrNil(argsJSON),
 		)
-		g.Generate()
+		err := g.Generate()
+		if err != nil {
+			panic(err)
+		}
 	},
 }
 
@@ -62,8 +69,12 @@ func init() {
 	viper.BindPFlag(layoutVar, Command.PersistentFlags().Lookup(layoutDirVar))
 
 	Command.PersistentFlags().StringVarP(&destPath, destPathVar, destPathVarShort, "",
-		"Path to write generated html.")
+		"Path to write generated html. Used if generate for specific layout.")
 	viper.BindPFlag(destPathVar, Command.PersistentFlags().Lookup(destPathVar))
+
+	Command.PersistentFlags().StringVarP(&destDir, destDirVar, destDirVarShort, "",
+		"Dir to write generated html. Used if generate for all layouts.")
+	viper.BindPFlag(destDirVar, Command.PersistentFlags().Lookup(destDirVar))
 
 	Command.PersistentFlags().StringVarP(&argsPath, argsPathVar, argsPathVarShort, "",
 		"Specify args json file path, default to example args.json if not provided.")
