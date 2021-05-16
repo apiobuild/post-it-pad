@@ -11,6 +11,11 @@ type ReceiptArgs struct {
 	Options       []Option `json:"options"`
 }
 
+func (r *ReceiptArgs) Process() (err error) {
+	r.SharedArgs.Process()
+	return
+}
+
 // Item ...
 type Item struct {
 	ProductName  string `json:"product_nickname"`

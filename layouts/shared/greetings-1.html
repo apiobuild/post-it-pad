@@ -4,8 +4,6 @@
       {{ if .ToEmail.Name }} Hello {{ Title .ToEmail.Name }}{{else}}Hi
       There{{end}}!
     </h3>
-    {{ if .TopContentHTML }}
-    <p class="lead">{{ .TopContentHTML }}</p>
-    {{ end }}
+    {{ if .TopContentHTML }} {{ .TopContentHTML }} {{ end }}
   </td>
 </tr>

@@ -20,8 +20,26 @@ type FeatureUpdatesArgs struct {
 
 // Announcement ...
 type Announcement struct {
-	ImageURL    string        `json:"image_url"`
-	Title       string        `json:"title"`
-	Description template.HTML `json:"description"`
-	Link        string        `json:"link"`
+	ImageURL            string        `json:"image_url"`
+	Title               string        `json:"title"`
+	DescriptionMarkDown Markdown      `json:"description"`
+	DescriptionHTML     template.HTML `json:"-"`
+	Link                string        `json:"link"`
+}
+
+func (f *FeatureUpdatesArgs) Process() (err error) {
+	f.SharedArgs.Process()
+	for i, a := range f.Announcements {
+		a.Process()
+		f.Announcements[i] = a
+	}
+	return
+}
+
+func (a *Announcement) Process() (err error) {
+	a.DescriptionHTML, err = a.DescriptionMarkDown.process()
+	if err != nil {
+		return
+	}
+	return
 }

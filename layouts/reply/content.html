@@ -7,11 +7,9 @@
         {{ range $i, $announcement := .Announcements }}
         <tr>
           <td>
-            {{ if eq $.Style "left-right"}}
-            <!-- -->
-            {{template "left-right.html" $announcement}} {{else}}
-            <!-- -->
-            {{template "large-image.html" $announcement}} {{end}}
+            {{ if eq $.Style "left-right"}} {{template "left-right.html"
+            $announcement}} {{else}} {{template "large-image.html"
+            $announcement}} {{end}}
           </td>
         </tr>
         {{ end }}
