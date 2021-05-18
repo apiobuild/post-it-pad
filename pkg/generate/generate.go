@@ -14,7 +14,7 @@ import (
 type Generator struct {
 	LayoutDir  string
 	LayoutName *string
-	DestPath   string
+	DestPath   *string
 	DestDir    string
 	HTML       *bytes.Buffer
 	ArgsPath   *string
@@ -45,7 +45,7 @@ func NewGenerator(layoutDir *string, layoutName *string, destPath *string, destD
 	g = Generator{
 		LayoutDir:  getStringOrDefault(layoutDir, DefaultLayoutDir),
 		LayoutName: layoutName,
-		DestPath:   getStringOrDefault(destPath, DefaultDestPath),
+		DestPath:   destPath,
 		DestDir:    getStringOrDefault(destDir, DefaultDestDir),
 		ArgsPath:   argsPath,
 		ArgsJSON:   argsJSON,
@@ -59,28 +59,33 @@ func (g Generator) isGenerateAll() bool {
 	return g.LayoutName == nil
 }
 
-func (g Generator) generateAndWrite(layoutName string) (err error) {
+func (g Generator) generateAndWrite(layoutName string, write bool) (err error) {
 	g.getLogFields(nil).Infof("Render and for layout %s", layoutName)
 
 	if err = g.GetTemplateByLayout(layoutName); err != nil {
 		return
 	}
 
-	var useFileName *string
+	// NOTE: if layout is not specified, default dest file name
+	var destFilename *string
 	if g.LayoutName == nil {
-		useFileName = &layoutName
+		destFilename = &layoutName
 	}
 
-	if err = g.writeToFile(useFileName); err != nil {
-		g.getLogFields(err).Fatal("Error writing generated html to file")
-		return
+	if write {
+		g.getLogFields(nil).Infof("Writing generated html to file %s", layoutName)
+		if err = g.writeToFile(destFilename); err != nil {
+			g.getLogFields(err).Fatal("Error writing generated html to file")
+			return
+		}
 	}
+
 	return
 }
 
 func (g Generator) generateAll() (err error) {
 	for _, layout := range Layouts {
-		if err = g.generateAndWrite(string(layout)); err != nil {
+		if err = g.generateAndWrite(string(layout), true); err != nil {
 			break
 		}
 	}
@@ -88,10 +93,12 @@ func (g Generator) generateAll() (err error) {
 }
 
 func (g Generator) writeToFile(filename *string) (err error) {
-	destPath := g.DestPath
+	var destPath string
 	if filename != nil {
 		os.MkdirAll(g.DestDir, os.ModePerm)
 		destPath = path.Join(g.DestDir, fmt.Sprintf("generated-%s.html", *filename))
+	} else {
+		destPath = *g.DestPath
 	}
 	g.getLogFields(nil).Infof("Writing generated html to file to %s", destPath)
 	// NOTE: 0755: overwrite
@@ -107,7 +114,7 @@ func (g Generator) Generate() (err error) {
 		return
 	}
 	g.getLogFields(nil).Info("Generate by layout name specified")
-	err = g.generateAndWrite(*g.LayoutName)
+	err = g.generateAndWrite(*g.LayoutName, g.DestPath != nil)
 	return
 }
 
