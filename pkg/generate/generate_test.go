@@ -19,6 +19,7 @@ func TestGenerateAll(t *testing.T) {
 	)
 	err := g.Generate()
 	assert.Nil(t, err)
+	assert.NotNil(t, g.HTML)
 }
 
 func TestGenerateReceipt(t *testing.T) {
@@ -34,6 +35,7 @@ func TestGenerateReceipt(t *testing.T) {
 	)
 	err := g.Generate()
 	assert.Nil(t, err)
+	assert.NotNil(t, g.HTML)
 }
 
 func TestGenerateLayoutError(t *testing.T) {

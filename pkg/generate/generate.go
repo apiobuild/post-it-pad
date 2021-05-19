@@ -59,7 +59,7 @@ func (g Generator) isGenerateAll() bool {
 	return g.LayoutName == nil
 }
 
-func (g Generator) generateAndWrite(layoutName string, write bool) (err error) {
+func (g *Generator) generateAndWrite(layoutName string, write bool) (err error) {
 	g.getLogFields(nil).Infof("Render and for layout %s", layoutName)
 
 	if err = g.GetTemplateByLayout(layoutName); err != nil {
@@ -107,7 +107,7 @@ func (g Generator) writeToFile(filename *string) (err error) {
 }
 
 // Generate generates actual templated email html
-func (g Generator) Generate() (err error) {
+func (g *Generator) Generate() (err error) {
 	if g.isGenerateAll() {
 		g.getLogFields(nil).Info("Generate for all layouts")
 		err = g.generateAll()
