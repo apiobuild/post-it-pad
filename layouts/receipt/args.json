@@ -1,7 +1,7 @@
 {
     "subject": "Example Receipt Layout",
     "top_content": "# Hello World\nThis is an example receipt email layout",
-    "header_image_url": "https://i.ibb.co/QjWfz14/order-confirmation-1.png",
+    "header_image_url": "https://i.ibb.co/GCqC7Pr/banner-confirmation-wave.png",
     "order_number": "123456",
     "order_created": "2020-01-01",
     "to": {
