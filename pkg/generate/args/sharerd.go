@@ -59,6 +59,7 @@ type ContactInfo struct {
 	Line        string `json:"line,omitempty"`
 	Email       string `json:"email,omitempty"`
 	Facebook    string `json:"facebook,omitempty"`
+	Youtube     string `json:"youtube,omitempty"`
 	Twitter     string `json:"twitter,omitempty"`
 	Instagram   string `json:"instagram,omitempty"`
 	PhoneNumber string `json:"phone,omitempty"`
