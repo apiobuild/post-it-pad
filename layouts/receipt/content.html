@@ -29,7 +29,6 @@
             <span class="badge">x{{$Item.ProductQty}}</span>
           </td>
           <td class="item">{{$Item.ProductName}}</td>
-          <td class="item" align="right">$</td>
           <td class="item" align="right">{{$Item.ProductPrice}}</td>
         </tr>
         {{end}}
@@ -38,13 +37,11 @@
         </tr>
         <tr>
           <td class="item" align="right" colspan="2">Subtotal</td>
-          <td class="item" align="right">$</td>
           <td class="item" align="right">{{.Total.SubTotal}}</td>
         </tr>
         {{ if not (CheckSkip .Total.Discount) }}
         <tr>
           <td class="item" align="right" colspan="2">Discount</td>
-          <td class="item" align="right">$</td>
           <td class="item" align="right" style="color: #dd4343">
             - {{.Total.Discount}}
           </td>
@@ -54,7 +51,6 @@
           <td class="item" align="right" colspan="2">
             Shipping ({{.Total.OrderShippingOption}})
           </td>
-          <td class="item" align="right">$</td>
           <td class="item" align="right">{{.Total.OrderShipping}}</td>
         </tr>
         {{ end }} {{ if not (CheckSkip .Total.TaxRate) }}
@@ -62,7 +58,6 @@
           <td class="item" align="right" colspan="2">
             Tax ({{.Total.TaxRate}}%)
           </td>
-          <td class="item" align="right">$</td>
           <td class="item" align="right">{{.Total.Tax}}</td>
         </tr>
         {{ end }}
@@ -70,7 +65,6 @@
           <td class="item" align="right" colspan="2">
             <b>Total</b>
           </td>
-          <td class="item" align="right">$</td>
           <td class="item" align="right" style="font-weight: bold">
             {{.Total.Total}}
           </td>
