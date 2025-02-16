@@ -65,4 +65,5 @@ type ContactInfo struct {
 	PhoneNumber string `json:"phone,omitempty"`
 	Name        string `json:"name"`
 	Website     string `json:"website,omitempty"`
+	NewsLetter  string `json:"news_letter,omitempty"`
 }
